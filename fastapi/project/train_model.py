@@ -29,7 +29,11 @@ y = df['MedHouseVal']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # --- Train model ---
-model = RandomForestRegressor(random_state=42)
+model = RandomForestRegressor(
+    n_estimators=50,  
+    max_depth=10,     
+    random_state=42
+)
 model.fit(X_train, y_train)
 
 
@@ -41,5 +45,5 @@ print("RMSE:", np.sqrt(mean_squared_error(y_test, y_pred)))
 print("R2:", r2_score(y_test, y_pred))
 
 # --- Save model ---
-joblib.dump(model, "model.joblib")
+joblib.dump(model, "model.joblib", compress=3)
 print("\nModel saved as 'model.joblib'")
