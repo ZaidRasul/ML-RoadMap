@@ -32,3 +32,13 @@ model = RandomForestRegressor(random_state=42)
 model.fit(X_train, y_train)
 
 
+# --- Evaluate ---
+y_pred = model.predict(X_test)
+print("\nModel Performance:")
+print("MAE:", mean_absolute_error(y_test, y_pred))
+print("RMSE:", root_mean_squared_error(y_test, y_pred, squared=False))
+print("R2:", r2_score(y_test, y_pred))
+
+# --- Save model ---
+joblib.dump(model, "model.joblib")
+print("\nModel saved as 'model.joblib'")
