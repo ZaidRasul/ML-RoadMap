@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, r2_score, mean_squared_error
 import joblib
+import os
 
 # --- Load dataset ---
 
@@ -47,5 +48,6 @@ print("RMSE:", np.sqrt(mean_squared_error(y_test, y_pred)))
 print("R2:", r2_score(y_test, y_pred))
 
 # --- Save model ---
-joblib.dump(model, "model.joblib", compress=3)
-print("\nModel saved as 'model.joblib'")
+
+save_path = os.path.join(os.path.dirname(__file__), "model.joblib")
+joblib.dump(model, save_path)
