@@ -12,3 +12,14 @@ data_bunch = fetch_california_housing(as_frame=True)
 df = pd.DataFrame(data_bunch.data, columns=data_bunch.feature_names)
 df['MedHouseVal'] = data_bunch.target
 
+# --- Explore dataset ---
+print("Dataset Info:")
+print(df.info())
+print("\nDataset Stats:")
+print(df.describe())
+
+# --- Preprocess ---
+# Drop rows with missing values (not expected in this dataset, but safe to include)
+df = df.dropna()
+
+
