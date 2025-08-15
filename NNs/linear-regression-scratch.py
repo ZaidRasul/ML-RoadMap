@@ -50,14 +50,15 @@ for epoch in range(epoch):
         print(f'Epoch [{epoch + 1}/{epoch}], Loss: {loss.item():.4f}')
 
 # Final parameters
-print(f'Final parameters: w = {w.item():.4f}, b = {b.item():.4f}')
+print("Final parameters:", w.item(), b.item())
 # Prediction after training
 # using the trained model to make predictions
-print(f'Prediction after training: f(5) = {forward(torch.tensor([5.0])).item():.4f}')
+print(f'Prediction after training: f(5) = {forward(torch.tensor([5.0])).item()}')
+
 #accuracy of the model
 # since this is a simple linear regression, we can check the accuracy by comparing the predicted values
 # with the actual values
 predicted = forward(X)
 accuracy = ((predicted - Y) ** 2).mean().item()
-print(f'Accuracy: {100 - accuracy:.2f}%')
+print(f'Accuracy: {100 - accuracy}%')
 
