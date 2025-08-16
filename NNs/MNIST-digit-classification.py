@@ -1,5 +1,17 @@
-import torch, torch.nn as nn, torch.optim as optim, torchvision
+from torchvision import datasets
+from torchvision.transforms import ToTensor #so we can convert the images to tensors
+from torch.utils.data import DataLoader
 
-dataloaders = torchvision.datasets.MNIST
-# MNIST digit classification using a 2 layer neural network
+train_data = datasets.MNIST(
+    root = 'data',
+    train = True, # telling it to load the training dataset
+    download = True, # to download the dataset 
+    transform = ToTensor()
+)
 
+test_data = datasets.MNIST(
+    root = 'data',
+    train = False, # telling it to load the test dataset
+    download = True, # to download the dataset 
+    transform = ToTensor()
+)
