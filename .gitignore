@@ -1,0 +1,7 @@
+*.joblib
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+NNs/data/*
+chat.rapidgpt
