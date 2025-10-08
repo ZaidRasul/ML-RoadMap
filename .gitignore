@@ -6,3 +6,5 @@ __pycache__/
 NNs/data/*
 chat.rapidgpt
 NNs/*.pth
+image_classifier.keras
+
