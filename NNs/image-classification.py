@@ -9,6 +9,7 @@ training_images, test_images = training_images / 255, test_images / 255
 
 # classes or features
 class_names = ['airplane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+'''
 for i in range(16):
     plt.subplot(4,4,i+1)
     plt.xticks([])
@@ -17,6 +18,7 @@ for i in range(16):
     plt.xlabel(class_names[training_labels[i][0]])
 
 plt.show()
+'''
 
 # smaller dataset for faster training
 training_images = training_images[:20000]
@@ -46,3 +48,18 @@ print(f"Accuracy: {accuracy}")
 model.save("image_classifier.keras")'''
 
 model = models.load_model("image_classifier.keras")
+
+img = cv.imread("car.jpg")
+img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
+
+# Resize to the size the model was trained on
+img = cv.resize(img, (32, 32))
+
+plt.imshow(img)
+plt.show()
+
+# Normalize and predict
+prediction = model.predict(np.array([img]) / 255)
+index = np.argmax(prediction)
+print(f"Predicted class: {class_names[index]}")
+
