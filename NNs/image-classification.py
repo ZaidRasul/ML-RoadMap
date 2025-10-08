@@ -13,7 +13,7 @@ for i in range(16):
     plt.subplot(4,4,i+1)
     plt.xticks([])
     plt.yticks([])
-    plt.inshow(training_images[i], cmap=plt.cm.binary)
+    plt.imshow(training_images[i], cmap=plt.cm.binary)
     plt.xlabel(class_names[training_labels[i][0]])
 
 plt.show()
