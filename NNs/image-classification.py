@@ -17,3 +17,10 @@ for i in range(16):
     plt.xlabel(class_names[training_labels[i][0]])
 
 plt.show()
+
+# smaller dataset for faster training
+training_images = training_images[:20000]
+training_labels = training_labels[:20000]
+test_images = test_images[:4000]
+test_labels = test_labels[:4000]
+
