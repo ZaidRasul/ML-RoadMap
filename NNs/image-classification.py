@@ -23,7 +23,7 @@ training_images = training_images[:20000]
 training_labels = training_labels[:20000]
 test_images = test_images[:4000]
 test_labels = test_labels[:4000]
-
+'''
 # Model architecture
 model = models.Sequential()
 model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)))
@@ -43,4 +43,6 @@ loss, accuracy = model.evaluate(test_images, test_labels)
 print(f"Loss: {loss}")
 print(f"Accuracy: {accuracy}")
 
-model.save("image_classifier.keras")
+model.save("image_classifier.keras")'''
+
+model = models.load_model("image_classifier.keras")
