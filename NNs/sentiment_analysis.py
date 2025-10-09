@@ -10,3 +10,7 @@ article.nlp() # prep for analysis
 # text = article.summary
 text = article.text # get the text 
 print(text)
+
+blob = TextBlob(text)
+sentiment = blob.sentiment.polarity
+print(sentiment)
