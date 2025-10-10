@@ -1,8 +1,8 @@
 from textblob import TextBlob
 
 
-''' from newspaper import Article
-import nltk
+'''
+from newspaper import Article
 
 url = "https://www.cnbc.com/2020/04/22/recession-depth-will-be-much-worse-than-2007-2009-lakshman-achuthan.html"
 article = Article(url)
