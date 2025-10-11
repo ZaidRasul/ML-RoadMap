@@ -5,6 +5,8 @@ class Camera:
         self.camera = cv.VideoCapture(0)
         if not self.camera.isOpened():
             raise Exception("Could not open video device")
+        self.width = self.camera.get(cv.CAP_PROP_FRAME_WIDTH)
+        self.height = self.camera.get(cv.CAP_PROP_FRAME_HEIGHT)
         
     def __del__(self):# destructor to close the camera
         if self.camera.isOpened():
