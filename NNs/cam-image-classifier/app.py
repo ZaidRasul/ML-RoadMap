@@ -15,7 +15,7 @@ class App:
         self.auto_predict = False
 
         self.camera = camera.Camera()
-        #self.init_gui()
+        self.init_gui()
         self.delay = 15
         #self.update()
         self.window.attributes('-topmost', True)
@@ -54,3 +54,21 @@ class App:
     def auto_predict(self):
         self.auto_predict = not self.auto_predict # negating the boolean value
         
+    
+    def save_for_class(self, class_number):
+        ret, frame = self.camera.get_frame()
+        if not os.path.exists('1'):
+            os.mkdir('1')
+        if not os.path.exists('2'):
+            os.mkdir('2')
+
+        # after ensuring the directory exists, save the frame to the directory in jpeg format in BGR format
+        cv.imwrite(f"{class_number}/frame{self.counters[class_number-1]}.jpeg", cv.cvtColor(frame, cv.COLOR_RGBA2BGR))
+        img = PIL.Image.open(f"{class_number}/frame{self.counters[class_number-1]}.jpeg")
+        img.thumbnail((150, 150), PIL.Image.ANTIALIAS)# resize the image
+        img.save()
+        self.counters[class_number-1] += 1 # increment the counter for the class
+
+
+
+                   
