@@ -20,6 +20,7 @@ class App:
         #self.update()
         self.window.attributes('-topmost', True)
         self.window.mainloop()
-
     
+    def auto_predict(self):
+        self.auto_predict = not self.auto_predict # negating the boolean value
         
