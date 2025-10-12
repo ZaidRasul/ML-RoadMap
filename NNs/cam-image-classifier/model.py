@@ -8,5 +8,23 @@ class Model:
         self.model = LinearSVC()
         self.trained = False
 
-    def train_model(self):
-        pass        
+    def train_model(self, counters):
+        img_list = np.array([])
+        class_list = np.array([])
+        for i in range (1, counters[0]):
+            img = cv.imread(f"1/frame{i}.jpeg")[:,:,0]
+            img = img.reshape(16800) # flattening the image
+            img_list = np.append(img_list, img)
+            class_list = np.append(class_list, 1)
+
+        for i in range (1, counters[1]):
+            img = cv.imread(f"2/frame{i}.jpeg")[:,:,0]
+            img = img.reshape(16800) # flattening the image
+            img_list = np.append(img_list, img)
+            class_list = np.append(class_list, 2)
+
+        img_list = img_list.reshape(counters[0] - 1 + counters[1] - 1, 16800) # reshaping the image list to be of shape (n_samples, n_features)
+        self.model.fit(img_list, class_list)
+        print("Model trained successfully")
+
+    
