@@ -54,7 +54,7 @@ class App:
         self.class_label.pack(anchor=tk.CENTER, expand=True)
 
 
-    def auto_predict(self):
+    def auto_predict_toggle(self):
         self.auto_predict = not self.auto_predict # negating the boolean value
         
     
