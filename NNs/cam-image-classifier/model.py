@@ -12,13 +12,13 @@ class Model:
         img_list = np.array([])
         class_list = np.array([])
         for i in range (1, counters[0]):
-            img = cv.imread(f"1/frame{i}.jpeg")[:,:,0]
+            img = cv.imread(f"1/frame{i}.jpg")[:,:,0]
             img = img.reshape(16800) # flattening the image
             img_list = np.append(img_list, img)
             class_list = np.append(class_list, 1)
 
         for i in range (1, counters[1]):
-            img = cv.imread(f"2/frame{i}.jpeg")[:,:,0]
+            img = cv.imread(f"2/frame{i}.jpg")[:,:,0]
             img = img.reshape(16800) # flattening the image
             img_list = np.append(img_list, img)
             class_list = np.append(class_list, 2)
@@ -29,12 +29,12 @@ class Model:
 
     def predict(self, frame):
         frame = frame[1]
-        cv.imwrite("frame.jpeg", cv.cvtColor(frame, cv.COLOR_RGB2GRAY))
-        img = PIL.Image.open("frame.jpeg")
+        cv.imwrite("frame.jpg", cv.cvtColor(frame, cv.COLOR_RGB2GRAY))
+        img = PIL.Image.open("frame.jpg")
         img.thumbnail((150, 150), PIL.Image.ANTIALIAS)
-        img.save("frame.jpeg")
+        img.save("frame.jpg")
 
-        img = cv.imread('frame.jpeg')[:, :, 0]
+        img = cv.imread('frame.jpg')[:, :, 0]
         img = img.reshape(16800)
         prediction = self.model.predict([img])
 
