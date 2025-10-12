@@ -68,8 +68,8 @@ class App:
         # after ensuring the directory exists, save the frame to the directory in jpeg format in BGR format
         cv.imwrite(f"{class_number}/frame{self.counters[class_number-1]}.jpg", cv.cvtColor(frame, cv.COLOR_RGBA2BGR))
         img = PIL.Image.open(f"{class_number}/frame{self.counters[class_number-1]}.jpg")
-        img.thumbnail((150, 150), PIL.Image.ANTIALIAS)# resize the image
-        img.save()
+        img.thumbnail((150, 150), PIL.Image.Resampling.LANCZOS)# resize the image
+        img.save(f"{class_number}/frame{self.counters[class_number-1]}.jpg")
         self.counters[class_number-1] += 1 # increment the counter for the class
 
     def reset(self):
