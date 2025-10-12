@@ -4,6 +4,7 @@ import PIL.Image, PIL.ImageTk
 import os
 import cv2 as cv
 import camera
+import model
 
 class App:
     def __init__(self, window=tk.Tk(), window_title="Cam-Image_Classifier"):
@@ -11,7 +12,7 @@ class App:
         self.window_title = window_title
 
         self.counters = [1, 1]
-        #self.model = something
+        self.model = model.Model()
         self.auto_predict = False
 
         self.camera = camera.Camera()
@@ -89,10 +90,19 @@ class App:
     def update(self):
         if self.auto_predict:
             self.predict()
-            pass
          
         ret, frame = self.camera.get_frame()
         if ret:
             self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
             self.canvas.create_image(0, 0, image = self.photo, anchor = tk.NW)
-        self.window.after(self.delay, self.update) 
+        self.window.after(self.delay, self.update)
+
+    def predict(self):
+        frame = self.camera.get_frame()
+        prediction = self.model.predict(frame)
+        if prediction == 1:
+            self.class_label.config(text=self.classname_one)
+        elif prediction == 2:
+            self.class_label.config(text=self.classname_two)
+        else:
+            self.class_label.config(text="Unknown")
