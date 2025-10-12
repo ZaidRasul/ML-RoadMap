@@ -27,4 +27,15 @@ class Model:
         self.model.fit(img_list, class_list)
         print("Model trained successfully")
 
-    
+    def predict(self, frame):
+        frame = frame[1]
+        cv.imwrite("frame.jpeg", cv.cvtColor(frame, cv.COLOR_RGB2GRAY))
+        img = PIL.Image.open("frame.jpg")
+        img.thumbnail((150, 150), PIL.Image.ANTIALIAS)
+        img.save("frame.jpg")
+
+        img = cv.imread('frame.jpg')[:, :, 0]
+        img = img.reshape(16800)
+        prediction = self.model.predict([img])
+
+        return prediction[0]
