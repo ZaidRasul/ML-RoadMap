@@ -33,10 +33,12 @@ class Model:
         frame = frame[1]
         cv.imwrite("frame.jpg", cv.cvtColor(frame, cv.COLOR_RGB2GRAY))
         img = PIL.Image.open("frame.jpg")
-        img.thumbnail((150, 150), PIL.Image.Resampling.LANCZOS)# resize the image
+        img.thumbnail((150, 112), PIL.Image.Resampling.LANCZOS)# resize the image
         img.save("frame.jpg")
 
         img = cv.imread('frame.jpg')[:, :, 0]
+        img = cv.resize(img, (150, 112))
+
         img = img.reshape(16800)
         prediction = self.model.predict([img])
 
