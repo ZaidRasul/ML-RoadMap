@@ -3,26 +3,54 @@ from textblob import TextBlob as tb
 import nltk
 from newspaper import Article
 
-nltk.download('punkt')
+def Analyze():
+    
+    url = url_text.get("1.0", "end")
+    
+    article = Article(url)
+    article.download()
+    article.parse()
+    article.nlp()
 
-url = "https://edition.cnn.com/2025/10/13/tech/openai-broadcom-power"
-article = Article(url)
-article.download()
-article.parse()
-article.nlp()
+    #when the text box is disabled, we need to enable it to insert text and then disable it again
+    title.config(state="normal")
+    authors.config(state="normal")
+    date.config(state="normal")
+    summary.config(state="normal")
+    sentiment.config(state="normal")
+    subjectivity.config(state="normal")
 
-print("Title:", article.title)
-print("Authors:", article.authors)
-print("Publication Date:", article.publish_date)
-print("Summary:", article.summary)
+    # Clear old text
+    title.delete("1.0", "end")
+    authors.delete("1.0", "end")
+    date.delete("1.0", "end")
+    summary.delete("1.0", "end")
+    sentiment.delete("1.0", "end")
+    subjectivity.delete("1.0", "end")
 
-# sentiment analysis gives polarity and subjectivity
-# polarity: -1 (negative) to 1 (positive)
-# subjectivity: 0 (objective) to 1 (subjective) [measure of personal opinion]
-sentiment = tb(article.text).sentiment
-print("Sentiment:", sentiment)
-print(f"Polarity: {"positive" if sentiment.polarity > 0 else "negative" if sentiment.polarity < 0 else "neutral"}")
-print(f"Subjectivity: {"subjective" if sentiment.subjectivity > 0.3 else "objective"}")
+    # intsert new text
+    title.insert("1.0", article.title)
+    authors.insert("1.0", ", ".join(article.authors))
+    date.insert("1.0", article.publish_date)
+    summary.insert("1.0", article.summary)
+    sentiment.insert("1.0", f"Polarity: {"positive" if sentiment.polarity > 0 else "negative" if sentiment.polarity < 0 else "neutral"}")
+    subjectivity.insert("1.0", f"Subjectivity: {"subjective" if sentiment.subjectivity > 0.3 else "objective"}")
+
+    #Disable the text box
+    title.config(state="disabled")
+    authors.config(state="disabled")
+    date.config(state="disabled")
+    summary.config(state="disabled")
+    sentiment.config(state="disabled")
+    subjectivity.config(state="disabled")
+
+    # sentiment analysis gives polarity and subjectivity
+    # polarity: -1 (negative) to 1 (positive)
+    # subjectivity: 0 (objective) to 1 (subjective) [measure of personal opinion]
+    sentiment = tb(article.text).sentiment
+    print("Sentiment:", sentiment)
+    print(f"Polarity: {"positive" if sentiment.polarity > 0 else "negative" if sentiment.polarity < 0 else "neutral"}")
+    print(f"Subjectivity: {"subjective" if sentiment.subjectivity > 0.3 else "objective"}")
 
 # GUI to display the article summary and sentiment
 root = tk.Tk()
@@ -68,14 +96,22 @@ sentiment = tk.Text(root, height=1, width=140)
 sentiment.config(state = "disabled", bg="#dddddd")
 sentiment.pack()
 
+# Subjectivity
+subjectivity_label = tk.Label(root, text="Subjectivity")
+subjectivity_label.pack()
+
+subjectivity = tk.Text(root, height=1, width=140)
+subjectivity.config(state = "disabled", bg="#dddddd")
+subjectivity.pack()
+
 # enter URL
 url_label = tk.Label(root, text="URL")
 url_label.pack()
 
-url = tk.Text(root, height=1, width=140)
-url.pack()
+url_text = tk.Text(root, height=1, width=140)
+url_text.pack()
 
-btn = tk.Button(root, text="Analyze", command=lambda: Anal(url.get("1.0", "end-1c"), title, authors, date, summary, sentiment))
+btn = tk.Button(root, text="Analyze", command=Analyze)
 btn.pack()
 
 root.mainloop()
