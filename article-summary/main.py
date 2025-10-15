@@ -22,4 +22,4 @@ print("Summary:", article.summary)
 sentiment = tb(article.text).sentiment
 print("Sentiment:", sentiment)
 print(f"Polarity: {"positive" if sentiment.polarity > 0 else "negative" if sentiment.polarity < 0 else "neutral"}")
-print(f"Subjectivity: {"subjective" if sentiment.subjectivity > 0.5 else "objective"}")
+print(f"Subjectivity: {"subjective" if sentiment.subjectivity > 0.3 else "objective"}")
