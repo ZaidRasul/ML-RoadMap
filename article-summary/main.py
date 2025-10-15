@@ -33,8 +33,9 @@ def Analyze():
     authors.insert("1.0", ", ".join(article.authors))
     date.insert("1.0", article.publish_date)
     summary.insert("1.0", article.summary)
-    sentiment.insert("1.0", f"Polarity: {"positive" if sentiment.polarity > 0 else "negative" if sentiment.polarity < 0 else "neutral"}")
-    subjectivity.insert("1.0", f"Subjectivity: {"subjective" if sentiment.subjectivity > 0.3 else "objective"}")
+    analysis = tb(article.text).sentiment
+    sentiment.insert("1.0", f"Polarity: {"positive" if analysis.polarity > 0 else "negative" if analysis.polarity < 0 else "neutral"}")
+    subjectivity.insert("1.0", f"Subjectivity: {"subjective" if analysis.subjectivity > 0.3 else "objective"}")
 
     #Disable the text box
     title.config(state="disabled")
@@ -47,10 +48,8 @@ def Analyze():
     # sentiment analysis gives polarity and subjectivity
     # polarity: -1 (negative) to 1 (positive)
     # subjectivity: 0 (objective) to 1 (subjective) [measure of personal opinion]
-    sentiment = tb(article.text).sentiment
-    print("Sentiment:", sentiment)
-    print(f"Polarity: {"positive" if sentiment.polarity > 0 else "negative" if sentiment.polarity < 0 else "neutral"}")
-    print(f"Subjectivity: {"subjective" if sentiment.subjectivity > 0.3 else "objective"}")
+    
+    
 
 # GUI to display the article summary and sentiment
 root = tk.Tk()
