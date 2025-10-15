@@ -21,3 +21,5 @@ print("Summary:", article.summary)
 # subjectivity: 0 (objective) to 1 (subjective) [measure of personal opinion]
 sentiment = tb(article.text).sentiment
 print("Sentiment:", sentiment)
+print(f"Polarity: {"positive" if sentiment.polarity > 0 else "negative" if sentiment.polarity < 0 else "neutral"}")
+print(f"Subjectivity: {"subjective" if sentiment.subjectivity > 0.5 else "objective"}")
