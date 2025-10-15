@@ -1,5 +1,5 @@
 import tkinter as tk
-from textblob import TextBlob
+from textblob import TextBlob as tb
 import nltk
 from newspaper import Article
 
@@ -15,3 +15,6 @@ print("Title:", article.title)
 print("Authors:", article.authors)
 print("Publication Date:", article.publish_date)
 print("Summary:", article.summary)
+
+sentiment = tb(article.text).sentiment
+print("Sentiment:", sentiment)
