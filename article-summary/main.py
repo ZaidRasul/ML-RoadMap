@@ -55,7 +55,7 @@ def Analyze():
 # GUI to display the article summary and sentiment
 root = tk.Tk()
 root.title("Article Summary and Sentiment Analysis")
-root.geometry("1200x600")
+root.geometry("1250x750")
 
 # Title
 tlabel = tk.Label(root, text="Title")
