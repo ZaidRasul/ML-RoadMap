@@ -8,3 +8,8 @@ article = Article(url)
 article.download()
 article.parse()
 article.nlp()
+
+print("Title:", article.title)
+print("Authors:", article.authors)
+print("Publication Date:", article.publish_date)
+print("Summary:", article.summary)
